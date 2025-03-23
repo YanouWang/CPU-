@@ -1,0 +1,26 @@
+#include<iostream>
+#include<windows.h>
+#include<stdlib.h>
+using namespace std;
+int main() {
+	for (int i = 0; i <= 15; i++) {
+		int n = pow(2, i);
+		long long head, tail, freq;
+		QueryPerformanceFrequency((LARGE_INTEGER*)&freq);
+		QueryPerformanceCounter((LARGE_INTEGER*)&head);
+		double* sum = new double[n];
+		for (int j = 0; j < n; j++) {
+			sum[j] = j;
+		}
+		int result = 0, result1 = 0, result2 = 0;
+		for (int j = 0; j < n; j += 2) {
+			result1 += sum[j];
+			result2 += sum[j + 1];
+		}
+		result = result1 + result2;
+		QueryPerformanceCounter((LARGE_INTEGER*)&tail);
+		cout << "Col: " << (tail - head) * 1000.0 / freq
+			<< "ms" << endl;
+	}
+	return 0;
+}
